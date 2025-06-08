@@ -1,0 +1,18 @@
+<google-map [height]="height" [width]="width" [options]="mapOptions" (mapClick)="onMapClick($event)"
+    (mapDragstart)="onMapDragStart()" (mapInitialized)="onMapReady($event)">
+
+    <map-kml-layer *ngIf="kmlUrl" [url]="kmlUrl" (statusChanged)="onKmlLoad()" (kmlClick)="onKmlClick($event)" />
+
+    <ng-container *ngIf="!hideMarkers">
+        <map-advanced-marker #markerElem="mapAdvancedMarker" *ngFor="let marker of markers; trackBy identify"
+            [position]="marker.position" [title]="marker.title ?? ''" [content]="marker.icon ?? null"
+            (mapClick)="onMarkerClick(markerElem, marker.infoWindowContent)"
+            (markerInitialized)="onMarkerReady($event)" />
+
+        <map-info-window *ngIf="markerInfoWindowOnClick"></map-info-window>
+    </ng-container>
+    <map-advanced-marker #userMarkerElem="mapAdvancedMarker" *ngFor="let marker of editableMarkers; trackBy identify"
+        [position]="marker.position" [title]="marker.title ?? ''" [content]="marker.icon ?? null"
+        (markerInitialized)="onMarkerReady($event)" />
+
+</google-map>
