@@ -1,63 +1,80 @@
-# GoogleMapLib
+# 🗺️ NG Google Map
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+[![npm version](https://img.shields.io/npm/v/ng-google-map.svg)](https://www.npmjs.com/package/ng-google-map)
+[![npm downloads](https://img.shields.io/npm/dm/ng-google-map.svg)](https://www.npmjs.com/package/ng-google-map)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Code scaffolding
+**A powerful, flexible, and easy-to-use Angular standalone component for advanced Google Maps features — animation, data layers, overlays, and full customization.**  
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Features
 
-```bash
-ng generate component component-name
-```
+- 📍 Display one or multiple markers with default or custom icons  
+- 💬 Show info windows on marker click or on map init (with text or custom HTML)  
+- 🧭 Animated camera transitions using tween.js  
+- ✨ Tooltip display on marker hover  
+- 🗂️ Cluster markers or manage each marker independently with position change events  
+- 🎯 Support for marker drop animation  
+- 🧱 KML & KMZ file support, plus GeoJSON rendering  
+- 🗟️ Custom overlays with size and content flexibility  
+- 🔒 Lock map camera to bounds (e.g., Saudi Arabia or any region)  
+- 🔧 Fine-grained map control: zoom levels, gestures, restrictions, map types, control sizing  
+- ⚡ High-performance rendering  
+- 📦 Fully standalone Angular component
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the library, run:
-
-```bash
-ng build google-map-lib
-```
-
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
-
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/google-map-lib
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Installation
 
 ```bash
-ng test
+npm install ng-google-map
 ```
 
-## Running end-to-end tests
+## Usage
 
-For end-to-end (e2e) testing, run:
+Import the component and use it in your standalone or module-based Angular app:
 
-```bash
-ng e2e
+```ts
+import { GoogleMapComponent } from 'ng-google-map';
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+```html
+<google-map
+  [center]="{ lat: 24.7136, lng: 46.6753 }"
+  [zoom]="10"
+  [markers]="markerList"
+  (markerPositionChanged)="onMarkerMoved($event)">
+</google-map>
+```
 
-## Additional Resources
+## Inputs & Outputs
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+| Input | Description |
+|-------|-------------|
+| `center` | The initial center of the map (LatLng object) |
+| `zoom` | Initial zoom level |
+| `markers` | List of markers with positions and options |
+| `kmlUrl` | URL to a KML/KMZ file |
+| `geoJson` | GeoJSON data object |
+| `customOverlay` | Object defining custom overlay data |
+| `mapRestrictions` | Restrict panning outside certain bounds |
+
+| Output | Description |
+|--------|-------------|
+| `markerPositionChanged` | Emits when a marker is dragged to a new location |
+| `mapReady` | Emits when the map is fully initialized |
+| `markerClicked` | Emits when a marker is clicked |
+
+## Dependencies
+
+- `@angular/core`
+- `@types/google.maps`
+- `tween.js`
+
+Make sure you load the Google Maps JavaScript API in your index.html with a valid API key.
+
+```html
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+```
+
+## License
+
+MIT
+
