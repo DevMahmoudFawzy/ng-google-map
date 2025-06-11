@@ -59,9 +59,22 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
    */
 
   // Borders coordinates for Saudi Arabia
-  saudi_Arabia_Borders: google.maps.LatLngBoundsLiteral = { north: 32.957, south: 16.2158, east: 55.4129, west: 34.3348 };
+  private _saudiArabiaBorders: google.maps.LatLngBoundsLiteral = { north: 32.957, south: 16.2158, east: 55.4129, west: 34.3348 };
   // Makkah Cords
-  makkah_cords: google.maps.LatLngLiteral = { lat: 21.422510, lng: 39.826168 };
+  private _makkahCoords: google.maps.LatLngLiteral = { lat: 21.422510, lng: 39.826168 };
+
+  @Input() width: string = "750px";
+
+  @Input() height: string = "400px";
+
+  // By Default Makkah Cords (the private field above)
+  @Input() center?: google.maps.LatLngLiteral;
+
+  // Read Only locations.
+  @Input() markers: IGoogleMapMarker[] = [];
+
+  // Bind a "true" value if you want to use your first marker in markers array as map center.
+  @Input() centerOnFirstMarker: boolean = false;
 
   // Bind a "true" value to lock the map on Saudi Arabia borders.
   @Input() lockMapToSaudiArabia: boolean = false;
@@ -93,14 +106,8 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
   // Bind a "false" value if you don't want animation for your camera.
   @Input() cameraAnimation: boolean = true;
 
-  // Bind a "true" value if you want to use your first marker in markers array as map center.
-  @Input() centerOnFirstMarker: boolean = false;
-
   // Bind a "false" value if you want zoom levels be bigger.
   @Input() fractionalZoomEnabled: boolean = true;
-
-  @Input() width: string = "750px";
-  @Input() height: string = "400px";
 
   // The size of all map controls in pixels. Must be a number type and 40 is the default size google use for it's api.
   @Input() controlSize: number = 32;
@@ -128,12 +135,6 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
 
   // The shape of the cursor.. you can set to a static value like 'crosshair' or a url for image.
   @Input() draggableCursor?: string;
-
-  // By Default Makkah Cords
-  @Input() center?: google.maps.LatLngLiteral;
-
-  // Read Only locations.
-  @Input() markers: IGoogleMapMarker[] = [];
 
   // markers that added by user click or two way data binding locations.
   @Input() editableMarkers: IGoogleMapMarker[] = [];
@@ -173,14 +174,15 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
   constructor(@Self() private googleMapService: GoogleMapService) { }
 
   ngOnInit(): void {
-    if (this.centerOnFirstMarker === true && this.markers.length > 0) {
+    // Check if the user wants to center the map on the first marker in markers array.
+    if (this.markers.length > 0 && this.centerOnFirstMarker === true) {
       this.center = this.markers[0].position;
     }
 
     // camera options obj is important as zoom property here is used as a starting point for camera animation OR a normal initial zoom.
     this.cameraOptions = {
       zoom: this.cameraAnimation ? this.cameraAnimationStartingZoom : this.zoom,
-      center: this.center ? this.center : this.kmlUrl ? undefined : this.makkah_cords
+      center: this.center ? this.center : this.kmlUrl ? undefined : this._makkahCoords
     };
 
     this.mapOptions = {
@@ -204,7 +206,7 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
     // check if user wants to lock the map to saudi arabia.
     let mapResBounds: google.maps.LatLngBoundsLiteral | google.maps.LatLngBounds | null = null;
     if (this.lockMapToSaudiArabia)
-      mapResBounds = this.saudi_Arabia_Borders;
+      mapResBounds = this._saudiArabiaBorders;
 
     // check if user wants to lock the map to some other area.
     if (this.mapRestrictionBounds)
