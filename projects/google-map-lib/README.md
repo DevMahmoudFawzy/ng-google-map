@@ -36,25 +36,24 @@ import { GoogleMapComponent } from 'ng-google-map';
 ```
 
 ```html
-<google-map
+<ng-google-map
   [center]="{ lat: 24.7136, lng: 46.6753 }"
   [zoom]="10"
   [markers]="markerList"
-  (markerPositionChanged)="onMarkerMoved($event)">
-</google-map>
+  (markerPositionChanged)="onMarkerMoved($event)" />
 ```
 
-## Inputs & Outputs
+## API
 
-| Input | Description |
-|-------|-------------|
-| `center` | The initial center of the map (LatLng object) |
-| `zoom` | Initial zoom level |
-| `markers` | List of markers with positions and options |
-| `kmlUrl` | URL to a KML/KMZ file |
-| `geoJson` | GeoJSON data object |
-| `customOverlay` | Object defining custom overlay data |
-| `mapRestrictions` | Restrict panning outside certain bounds |
+### Inputs & Outputs
+
+| Input | Type | Description |
+|-------|------|-------------|
+| `height` | string | The height along the y-axis, in pixels. |
+| `width` | string | The width along the x-axis, in pixels. |
+| `center` | google.maps.LatLngLiteral | Specifies the coordinates where the Google Map should be centered. |
+| `markers` | IGoogleMapMarker[] | Read Only locations markers on the map. |
+| `centerOnFirstMarker` | boolean | Bind a "true" value if you want to use your first marker in markers array as map center. |
 
 | Output | Description |
 |--------|-------------|
@@ -62,11 +61,25 @@ import { GoogleMapComponent } from 'ng-google-map';
 | `mapReady` | Emits when the map is fully initialized |
 | `markerClicked` | Emits when a marker is clicked |
 
+### Defaults
+#### `@Input() center?: google.maps.LatLngLiteral`
+
+Specifies the coordinates where the Google Map should be centered.
+
+- **Type:** `google.maps.LatLngLiteral`
+- **Optional:** Yes
+- **Default:** If not provided, the map will center on **Makkah**. (note that if "**kmlUrl**" provided, the map will be centered on it instead of Makkah)
+
+```ts
+Default:
+center = { lat: 21.422510, lng: 39.826168 }; // Makkah coordinates
+```
+
 ## Dependencies
 
 - `@angular/core`
-- `@types/google.maps`
-- `tween.js`
+- `@angular/google-maps`
+- `@tweenjs/tween.js`
 
 Make sure you load the Google Maps JavaScript API in your index.html with a valid API key.
 
@@ -77,4 +90,3 @@ Make sure you load the Google Maps JavaScript API in your index.html with a vali
 ## License
 
 MIT
-
