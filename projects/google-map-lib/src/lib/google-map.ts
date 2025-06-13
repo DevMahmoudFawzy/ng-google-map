@@ -110,7 +110,7 @@ export class GoogleMapComponent implements OnInit, OnDestroy {
   @Input() fractionalZoomEnabled: boolean = true;
 
   // The size of all map controls in pixels. Must be a number type and 40 is the default size google use for it's api.
-  @Input() controlSize: number = 32;
+  @Input() controlSize: number = 40;
 
   // This for controlling if user can scroll page over the map or not and zooming functionality. It's 'auto' by default
   @Input() gestureHandling: 'cooperative' | 'auto' | 'greedy' | 'none' = 'auto';

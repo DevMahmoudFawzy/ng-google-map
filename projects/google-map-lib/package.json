@@ -1,6 +1,6 @@
 {
   "name": "ng-google-map",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A powerful, flexible, and easy-to-use Angular standalone component for advanced Google Maps features — animation, data layers, overlays, and full customization.",
   "keywords": [
     "angular",
