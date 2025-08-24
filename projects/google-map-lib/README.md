@@ -128,42 +128,8 @@ import { GoogleMapComponent } from 'ng-google-map';
 
 ### Inputs & Outputs
 
-| Input                         | Type                                                      | Description                                                                                                        |
-| ---------------------         | -------------------------                                 | ----------------------------------------------------------------------------------------                           |
-| `height`                      | string                                                    | The height along the y-axis, in pixels.                                                                            |
-| `width`                       | string                                                    | The width along the x-axis, in pixels.                                                                             |
-| `center`                      | google.maps.LatLngLiteral                                 | Specifies the coordinates where the Google Map should be centered.                                                 |
-| `markers`                     | IGoogleMapMarker[]                                        | Read Only locations markers on the map.                                                                            |
-| `centerOnFirstMarker`         | boolean                                                   | Bind a "true" value if you want to use your first marker in markers array as map center.                           |
-| `cameraAnimation`             | boolean                                                   | Bind a "false" value if you don't want animation for your camera.                                                  |
-| `cameraAnimationStartingZoom` | number                                                    | The zoom level where animation will start from. (level 5 by default).                                              |
-| `zoom`                        | number                                                    | Recommended Values between 5 and 15 (lower values is closer to sky and higher values closer to the ground).        |
-| `minZoom`                     | number                                                    | Cannot "Zoom out" once zoom reach this value. (The lower the value the more you can zoom out).                     |
-| `maxZoom`                     | number                                                    | Cannot "Zoom in" once zoom reach this value. (The higher the value the more you can zoom in).                      |
-| `initialMapType`              | 'satellite' &#124; 'hybrid' &#124; 'roadmap'              | The initial map type that show up once the map load. "hybrid" means satellite but with labels on                   |
-| `gestureHandling`             | 'cooperative' &#124; 'auto' &#124; 'greedy' &#124; 'none' | This for controlling if user can scroll page over the map or not and zooming functionality. It's 'auto' by default |
-| `draggableCursor`             | string                                                    | The shape of the cursor.. you can set to a static value like 'crosshair' or a url for image.                       |
-| `controlSize`                 | number                                                    | The size of all map controls in pixels. Must be a number type and 40 is the default size.                          |
-| `draggableCursor`             | string                                                    | The shape of the cursor.. you can set to a static value like 'crosshair' or a url for image.                       |
-
-| Output        | Description                                                              |
-| ------------- | ------------------------------------------------------------------------ |
-| `kmlClick`    | Listen to this event if you want to get the feature data from kml popup. |
-| `coordsClick` | Listen to this event if you want to get the new marker position.         |
- 
-### Defaults
-#### `@Input() center?: google.maps.LatLngLiteral`
-
-Specifies the coordinates where the Google Map should be centered.
-
-- **Type:** `google.maps.LatLngLiteral`
-- **Optional:** Yes
-- **Default:** If not provided, the map will center on **Makkah**. (note that if "**kmlUrl**" provided, the map will be centered on it instead of Makkah)
-
-```ts
-Default:
-center = { lat: 21.422510, lng: 39.826168 }; // Makkah coordinates
-```
+To keep this README lightweight, the full list of component inputs and outputs is available on [GitHub repository](https://github.com/DevMahmoudFawzy/ng-google-map).  
+We recommend checking there for the most accurate and updated details.
 
 ## License
 

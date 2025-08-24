@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "watch:lib": "ng build google-map-lib --watch",
-    "link:lib": "cd projects/google-map-lib && npm link"
+    "link:lib": "cd projects/google-map-lib && npm link",
+    "publish:lib": "ng build google-map-lib && cd dist/google-map-lib && npm publish"
   },
   "private": true,
   "dependencies": {
